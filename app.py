@@ -4,17 +4,17 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-app.secret_key = 'kunci_rahasia_metafora_id'
-
-# --- KONFIGURASI ---
+app.secret_key = 'kunci_rahasia_metafora_id
+# --- KONFIGURASI PATH UNTUK VERCEL ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATABASE = os.path.join(BASE_DIR, 'metafora.db')
-UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static/uploads')
+
+# Di Vercel, kita harus menulis database ke folder /tmp
+DATABASE = '/tmp/metafora.db' 
+UPLOAD_FOLDER = '/tmp/uploads'
 
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # --- FUNGSI DATABASE ---
 def get_db_connection():
