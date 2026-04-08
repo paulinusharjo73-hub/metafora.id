@@ -138,10 +138,11 @@ def delete(id):
             session['my_articles'] = my_list
 
     return redirect(url_for('index'))
+app = app  # Tambahkan ini agar Vercel kenal
 
-if __name__ == '__main__':
-    # Menjalankan inisialisasi database saat aplikasi dimulai
-    init_db()
+init_db()
+if __name__ == "__main__":
+    app.run(debug=True)
     
     # Mengambil PORT dari environment variable (penting untuk hosting)
     # Jika tidak ada, default ke port 5000
